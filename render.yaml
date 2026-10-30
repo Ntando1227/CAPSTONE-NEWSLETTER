@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: the-newsroom-demo
+    runtime: node
+    plan: free
+    buildCommand: corepack pnpm install --frozen-lockfile && NEWSROOM_RENDER_DEMO=true corepack pnpm run build
+    startCommand: node scripts/render-start.mjs
+    healthCheckPath: /
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: 22.13.0
+      - key: NEWSROOM_RENDER_DEMO
+        value: "true"
